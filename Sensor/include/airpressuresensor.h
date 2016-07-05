@@ -24,7 +24,7 @@ using namespace std;
  * @brief The AirPressureSensor class provides an implementation of readSensor() for the Sensor TODO
  *
  * The AirPressureSensor class is an implementation of the interface SensorType and implements the function readSensor().
- * The design of is based on the design pattern 'strategy'.
+ * The design of it is based on the design pattern 'strategy'.
  * In respect of this the AirPressureSensor-class is a so called 'ConcreteStrategy' within the Strategy-Pattern.
  */
 class AirPressureSensor : public SensorType {
