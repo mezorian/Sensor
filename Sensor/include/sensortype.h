@@ -17,7 +17,7 @@
  * In respect of this the SensorType-class is the so called 'IStrategy' within the Strategy-Pattern.
  *
  * SensorType can be implemented by different types of sensor-classes.
- * If you want to inherit from SensorType you have to implement the readSensor()-function.
+ * If one wants to inherit from SensorType one has to implement the readSensor()-function.
  *
  *
  */
