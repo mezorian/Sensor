@@ -20,7 +20,7 @@
  *
  * The Sensor class provides access to different kinds of sensors, which are defined as implementations
  * of the interface SensorType.
- * By setSensorType() one can choose the type of the sensor you want to access.
+ * By setSensorType() one can choose the type of the sensor one wants to access.
  * The function readSensor() returns the double value of the current sensor measurement
  */
 class Sensor {
@@ -30,7 +30,7 @@ class Sensor {
 
         /* --- getter and setter --- */
         void setSensorType(SensorType *val_) { sensorType = val_; };
-        //SensorType getSensorType()          { return sensorType; };
+        SensorType* getSensorType()          { return sensorType; };
 
         /* --- measuring --- */
         double readSensor();

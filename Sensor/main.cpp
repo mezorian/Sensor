@@ -8,6 +8,8 @@ int main() {
     Sensor1.setSensorType(new TemperatureSensor());
     cout << "created temperature sensor " << endl;
     cout << "TemperatureSensor.read == " << Sensor1.readSensor() << endl;
+    SensorType *ST = Sensor1.getSensorType();
+
 
     Sensor Sensor2;
     Sensor2.setSensorType(new AirPressureSensor());
