@@ -9,7 +9,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "sensortype.h"
+#include "SensorType.h"
 
 /**
  * Sensor class

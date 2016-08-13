@@ -14,14 +14,17 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
+INCLUDEPATH += include/
+INCLUDEPATH += ../include/
+
 
 SOURCES += main.cpp \
-    src/sensor.cpp \
-    src/temperaturesensor.cpp \
-    src/airpressuresensor.cpp
+    src/AirPressureSensor.cpp \
+    src/Sensor.cpp \
+    src/TemperatureSensor.cpp
 
 HEADERS += \
-    include/sensor.h \
-    include/sensortype.h \
-    include/temperaturesensor.h \
-    include/airpressuresensor.h
+    include/AirPressureSensor.h \
+    include/Sensor.h \
+    include/SensorType.h \
+    include/TemperatureSensor.h

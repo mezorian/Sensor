@@ -15,7 +15,7 @@ CXX           = g++
 DEFINES       = -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Sensor -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
+INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Sensor -I../Sensor/include -I../include/ -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -m64
 LIBS          = $(SUBLIBS) -lQt5Core -lpthread 
@@ -46,13 +46,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Sensor/main.cpp \
-		../Sensor/src/sensor.cpp \
-		../Sensor/src/temperaturesensor.cpp \
-		../Sensor/src/airpressuresensor.cpp 
+		../Sensor/src/AirPressureSensor.cpp \
+		../Sensor/src/Sensor.cpp \
+		../Sensor/src/TemperatureSensor.cpp 
 OBJECTS       = main.o \
-		sensor.o \
-		temperaturesensor.o \
-		airpressuresensor.o
+		AirPressureSensor.o \
+		Sensor.o \
+		TemperatureSensor.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -80,6 +80,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
@@ -106,9 +110,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../Sensor/Sensor.pro ../Sensor/main.cpp \
-		../Sensor/src/sensor.cpp \
-		../Sensor/src/temperaturesensor.cpp \
-		../Sensor/src/airpressuresensor.cpp
+		../Sensor/src/AirPressureSensor.cpp \
+		../Sensor/src/Sensor.cpp \
+		../Sensor/src/TemperatureSensor.cpp
 QMAKE_TARGET  = Sensor
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Sensor
@@ -168,6 +172,10 @@ Makefile: ../Sensor/Sensor.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-6
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
@@ -223,6 +231,10 @@ Makefile: ../Sensor/Sensor.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-6
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri:
@@ -257,7 +269,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Sensor1.0.0 || mkdir -p .tmp/Sensor1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/include/sensor.h ../Sensor/include/sensortype.h ../Sensor/include/temperaturesensor.h ../Sensor/include/airpressuresensor.h .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/main.cpp ../Sensor/src/sensor.cpp ../Sensor/src/temperaturesensor.cpp ../Sensor/src/airpressuresensor.cpp .tmp/Sensor1.0.0/ && (cd `dirname .tmp/Sensor1.0.0` && $(TAR) Sensor1.0.0.tar Sensor1.0.0 && $(COMPRESS) Sensor1.0.0.tar) && $(MOVE) `dirname .tmp/Sensor1.0.0`/Sensor1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Sensor1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/include/AirPressureSensor.h ../Sensor/include/Sensor.h ../Sensor/include/SensorType.h ../Sensor/include/TemperatureSensor.h .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/main.cpp ../Sensor/src/AirPressureSensor.cpp ../Sensor/src/Sensor.cpp ../Sensor/src/TemperatureSensor.cpp .tmp/Sensor1.0.0/ && (cd `dirname .tmp/Sensor1.0.0` && $(TAR) Sensor1.0.0.tar Sensor1.0.0 && $(COMPRESS) Sensor1.0.0.tar) && $(MOVE) `dirname .tmp/Sensor1.0.0`/Sensor1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Sensor1.0.0
 
 
 clean:compiler_clean 
@@ -294,22 +306,20 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Sensor/main.cpp ../Sensor/include/sensor.h \
-		../Sensor/include/sensortype.h \
-		../Sensor/include/temperaturesensor.h
+main.o: ../Sensor/main.cpp ../Sensor/include/Sensor.h \
+		../Sensor/include/SensorType.h \
+		../Sensor/include/TemperatureSensor.h \
+		../Sensor/include/AirPressureSensor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Sensor/main.cpp
 
-sensor.o: ../Sensor/src/sensor.cpp ../Sensor/include/sensor.h \
-		../Sensor/include/sensortype.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sensor.o ../Sensor/src/sensor.cpp
+AirPressureSensor.o: ../Sensor/src/AirPressureSensor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AirPressureSensor.o ../Sensor/src/AirPressureSensor.cpp
 
-temperaturesensor.o: ../Sensor/src/temperaturesensor.cpp ../Sensor/include/temperaturesensor.h \
-		../Sensor/include/sensortype.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o temperaturesensor.o ../Sensor/src/temperaturesensor.cpp
+Sensor.o: ../Sensor/src/Sensor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Sensor.o ../Sensor/src/Sensor.cpp
 
-airpressuresensor.o: ../Sensor/src/airpressuresensor.cpp ../Sensor/include/airpressuresensor.h \
-		../Sensor/include/sensortype.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o airpressuresensor.o ../Sensor/src/airpressuresensor.cpp
+TemperatureSensor.o: ../Sensor/src/TemperatureSensor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TemperatureSensor.o ../Sensor/src/TemperatureSensor.cpp
 
 ####### Install
 

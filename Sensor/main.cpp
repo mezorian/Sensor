@@ -1,7 +1,7 @@
 #include <iostream>
-#include "include/sensor.h"
-#include "include/temperaturesensor.h"
-#include "include/airpressuresensor.h"
+#include "Sensor.h"
+#include "TemperatureSensor.h"
+#include "AirPressureSensor.h"
 
 int main() {
     Sensor Sensor1;

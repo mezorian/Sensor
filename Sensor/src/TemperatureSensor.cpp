@@ -6,7 +6,7 @@
  * @version 1.0 20160705
  */
 
-#include "../include/temperaturesensor.h"
+#include "TemperatureSensor.h"
 
 /**
  * TemperatureSensor::readSensor

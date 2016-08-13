@@ -6,7 +6,7 @@
  * @version 1.0 20160705
  */
 
-#include "../include/sensor.h"
+#include "Sensor.h"
 
 /**
  * Sensor::readSensor

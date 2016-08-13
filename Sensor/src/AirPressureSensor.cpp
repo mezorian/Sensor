@@ -6,7 +6,7 @@
  * @version 1.0 20160705
  */
 
-#include "../include/airpressuresensor.h"
+#include "AirPressureSensor.h"
 
 /**
  * AirPressureSensor::readSensor

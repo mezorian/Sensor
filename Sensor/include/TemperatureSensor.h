@@ -17,11 +17,11 @@
 using namespace std;
 // --- TODO -- dummy code ---
 
-#include "sensortype.h"
+#include "SensorType.h"
 
 /**
  * TemperatureSensor class
- * @brief The TemperatureSensor class provides an implementation of readSensor() for the Sensor TODO
+ * @brief The TemperatureSensor class provides an implementation of readSensor() for the Sensor TODO Dummy
  * The TemperatureSensor class is an implementation of the interface SensorType and implements the function readSensor().
  * The design of it is based on the design pattern 'strategy'.
  * In respect of this the TemperatureSensor-class is a so called 'ConcreteStrategy' within the Strategy-Pattern.

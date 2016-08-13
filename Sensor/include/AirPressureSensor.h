@@ -17,7 +17,7 @@
 using namespace std;
 // --- TODO -- dummy code ---
 
-#include "sensortype.h"
+#include "SensorType.h"
 
 /**
  * AirPressureSensor class
