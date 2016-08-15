@@ -30,4 +30,5 @@ HEADERS += \
     include/Sensor.h \
     include/SensorType.h \
     include/TemperatureSensor.h \
-    include/DataBuffer.h
+    include/DataBuffer.h \
+    include/catch.hpp
