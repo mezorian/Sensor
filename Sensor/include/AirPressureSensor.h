@@ -18,6 +18,7 @@ using namespace std;
 // --- TODO -- dummy code ---
 
 #include "SensorType.h"
+#include "DataBuffer.h"
 
 /**
  * AirPressureSensor class
@@ -33,7 +34,7 @@ class AirPressureSensor : public SensorType {
         AirPressureSensor() {};
 
         /* --- measuring --- */
-        double readSensor();
+        DataBuffer readSensor();
 };
 
 #endif // AIRPRESSURESENSOR_H

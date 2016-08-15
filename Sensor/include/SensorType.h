@@ -9,6 +9,8 @@
 #ifndef SENSORTYPE_H
 #define SENSORTYPE_H
 
+#include "DataBuffer.h"
+
 /**
  * SensorType class
  * @brief The SensorType class is an interface which outsources the readSensor-function from Sensor-Class
@@ -24,7 +26,7 @@
 class SensorType {
     public:
         SensorType() {};
-        virtual double readSensor() = 0;
+        virtual DataBuffer readSensor() = 0;
 };
 
 #endif // SENSORTYPE_H

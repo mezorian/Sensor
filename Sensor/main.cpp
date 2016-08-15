@@ -4,6 +4,11 @@
 #include "AirPressureSensor.h"
 
 int main() {
+    // --- TODO -- dummy code ---
+    // randomize
+    srand(time(NULL));
+    // --- TODO -- dummy code ---
+
     Sensor Sensor1;
     Sensor1.setSensorType(new TemperatureSensor());
     cout << "created temperature sensor " << endl;

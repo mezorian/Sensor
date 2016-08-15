@@ -18,6 +18,6 @@
  * measuring to implementation of SensorType-interface.
  * @return returns the current measurement-value as a double
  */
-double Sensor::readSensor() {
+DataBuffer Sensor::readSensor() {
     return sensorType->readSensor();
 }

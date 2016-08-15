@@ -10,6 +10,7 @@
 #define SENSOR_H
 
 #include "SensorType.h"
+#include "DataBuffer.h"
 
 /**
  * Sensor class
@@ -33,7 +34,7 @@ class Sensor {
         SensorType* getSensorType()          { return sensorType; };
 
         /* --- measuring --- */
-        double readSensor();
+        DataBuffer readSensor();
 
     private:
         SensorType *sensorType;

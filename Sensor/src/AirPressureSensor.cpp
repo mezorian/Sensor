@@ -10,12 +10,17 @@
 
 /**
  * AirPressureSensor::readSensor
- * @brief readSensor() returns the current air pressure measured by the sensor TODO
- * @return a double value in hektopascal, measured by the sensor TODO
+ * @brief readSensor() returns the current air pressure measured by the irpressure-sensor
+ * @return a DataBuffer which contains a air pressure-value hectopascal, measured by the airpressure-sensor
  */
-double AirPressureSensor::readSensor() {
+DataBuffer AirPressureSensor::readSensor() {
+    DataBuffer result;
+    result.dataSource = "WeatherStation";
+
     // --- TODO -- dummy code ---
     cout << "read AirPressure sensor" << endl;
-    return (rand() % 400) + 800 ;
+    result.data["Luftdruck_2m"] = (rand() % 400) + 800 ;
     // --- TODO -- dummy code ---
+
+    return result;
 }

@@ -10,12 +10,17 @@
 
 /**
  * TemperatureSensor::readSensor
- * @brief readSensor() returns the current temperature measured by the sensor TODO
- * @return a double value in degree celsius, measured by the sensor TODO
+ * @brief readSensor() returns the current temperature measured by the temperature-sensor
+ * @return a Databuffer which contains temperature value in degree celsius, measured by the temperature-sensor
  */
-double TemperatureSensor::readSensor() {
+DataBuffer TemperatureSensor::readSensor() {
+    DataBuffer result;
+    result.dataSource = "WeatherStation";
+
     // --- TODO -- dummy code ---
     cout << "read Temperature sensor" << endl;
-    return rand() % 60;;
+    result.data["Lufttemperatur_2m"] = rand() % 60;
     // --- TODO -- dummy code ---
+
+    return result;
 }

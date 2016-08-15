@@ -10,6 +10,8 @@
 #ifndef TEMPERATURESENSOR_H
 #define TEMPERATURESENSOR_H
 
+#include "DataBuffer.h"
+
 // --- TODO -- dummy code ---
 #include <iostream>
 #include <stdlib.h>
@@ -32,7 +34,7 @@ class TemperatureSensor : public SensorType {
         TemperatureSensor() {};
 
         /* --- measuring --- */
-        double readSensor();
+        DataBuffer readSensor();
 };
 
 #endif // TEMPERATURESENSOR_H
