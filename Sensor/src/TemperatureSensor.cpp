@@ -16,6 +16,7 @@
 DataBuffer TemperatureSensor::readSensor() {
     DataBuffer result;
     result.dataSource = "WeatherStation";
+    result.useDataSource = true;
 
     // --- TODO -- dummy code ---
     cout << "read Temperature sensor" << endl;

@@ -16,6 +16,7 @@
 DataBuffer AirPressureSensor::readSensor() {
     DataBuffer result;
     result.dataSource = "WeatherStation";
+    result.useDataSource = true;
 
     // --- TODO -- dummy code ---
     cout << "read AirPressure sensor" << endl;
