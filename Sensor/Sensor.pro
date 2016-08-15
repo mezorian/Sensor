@@ -18,12 +18,20 @@ TEMPLATE = app
 INCLUDEPATH += include/
 INCLUDEPATH += ../include/
 
+LIBS += -lcurl
 
-SOURCES += main.cpp \
+
+SOURCES += \
     src/AirPressureSensor.cpp \
     src/Sensor.cpp \
     src/TemperatureSensor.cpp \
-    src/DataBuffer.cpp
+    src/DataBuffer.cpp \
+    test/main.cpp \
+    src/DBInterface.cpp \
+    src/HTTPRequest.cpp \
+    src/LogWriter.cpp \
+    src/SLevel.cpp \
+    main_old.cpp
 
 HEADERS += \
     include/AirPressureSensor.h \
@@ -31,4 +39,9 @@ HEADERS += \
     include/SensorType.h \
     include/TemperatureSensor.h \
     include/DataBuffer.h \
-    include/catch.hpp
+    include/catch.hpp \
+    include/Config.h \
+    include/DBInterface.h \
+    include/HTTPRequest.h \
+    include/LogWriter.h \
+    include/SLevel.h

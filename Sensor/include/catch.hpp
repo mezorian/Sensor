@@ -10329,8 +10329,8 @@ namespace Catch {
 #ifndef __OBJC__
 
 // Standard C/C++ main entry point
-int main5 (int argc, char * argv[]) {
-//int main (int argc, char * argv[]) {
+//int main2 (int argc, char * argv[]) {
+int main (int argc, char * argv[]) {
     return Catch::Session().run( argc, argv );
 }
 

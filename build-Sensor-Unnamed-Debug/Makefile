@@ -18,7 +18,7 @@ CXXFLAGS      = -m64 -pipe -g -std=c++0x -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I../Sensor -I../Sensor/include -I../include/ -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I.
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -lQt5Core -lpthread 
+LIBS          = $(SUBLIBS) -lcurl -lQt5Core -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -45,16 +45,26 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Sensor/main.cpp \
-		../Sensor/src/AirPressureSensor.cpp \
+SOURCES       = ../Sensor/src/AirPressureSensor.cpp \
 		../Sensor/src/Sensor.cpp \
 		../Sensor/src/TemperatureSensor.cpp \
-		../Sensor/src/DataBuffer.cpp 
-OBJECTS       = main.o \
-		AirPressureSensor.o \
+		../Sensor/src/DataBuffer.cpp \
+		../Sensor/test/main.cpp \
+		../Sensor/src/DBInterface.cpp \
+		../Sensor/src/HTTPRequest.cpp \
+		../Sensor/src/LogWriter.cpp \
+		../Sensor/src/SLevel.cpp \
+		../Sensor/main_old.cpp 
+OBJECTS       = AirPressureSensor.o \
 		Sensor.o \
 		TemperatureSensor.o \
-		DataBuffer.o
+		DataBuffer.o \
+		main.o \
+		DBInterface.o \
+		HTTPRequest.o \
+		LogWriter.o \
+		SLevel.o \
+		main_old.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -112,11 +122,16 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../Sensor/Sensor.pro ../Sensor/main.cpp \
-		../Sensor/src/AirPressureSensor.cpp \
+		../Sensor/Sensor.pro ../Sensor/src/AirPressureSensor.cpp \
 		../Sensor/src/Sensor.cpp \
 		../Sensor/src/TemperatureSensor.cpp \
-		../Sensor/src/DataBuffer.cpp
+		../Sensor/src/DataBuffer.cpp \
+		../Sensor/test/main.cpp \
+		../Sensor/src/DBInterface.cpp \
+		../Sensor/src/HTTPRequest.cpp \
+		../Sensor/src/LogWriter.cpp \
+		../Sensor/src/SLevel.cpp \
+		../Sensor/main_old.cpp
 QMAKE_TARGET  = Sensor
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Sensor
@@ -275,7 +290,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Sensor1.0.0 || mkdir -p .tmp/Sensor1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/include/AirPressureSensor.h ../Sensor/include/Sensor.h ../Sensor/include/SensorType.h ../Sensor/include/TemperatureSensor.h ../Sensor/include/DataBuffer.h .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/main.cpp ../Sensor/src/AirPressureSensor.cpp ../Sensor/src/Sensor.cpp ../Sensor/src/TemperatureSensor.cpp ../Sensor/src/DataBuffer.cpp .tmp/Sensor1.0.0/ && (cd `dirname .tmp/Sensor1.0.0` && $(TAR) Sensor1.0.0.tar Sensor1.0.0 && $(COMPRESS) Sensor1.0.0.tar) && $(MOVE) `dirname .tmp/Sensor1.0.0`/Sensor1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Sensor1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/include/AirPressureSensor.h ../Sensor/include/Sensor.h ../Sensor/include/SensorType.h ../Sensor/include/TemperatureSensor.h ../Sensor/include/DataBuffer.h ../Sensor/include/catch.hpp ../Sensor/include/Config.h ../Sensor/include/DBInterface.h ../Sensor/include/HTTPRequest.h ../Sensor/include/LogWriter.h ../Sensor/include/SLevel.h .tmp/Sensor1.0.0/ && $(COPY_FILE) --parents ../Sensor/src/AirPressureSensor.cpp ../Sensor/src/Sensor.cpp ../Sensor/src/TemperatureSensor.cpp ../Sensor/src/DataBuffer.cpp ../Sensor/test/main.cpp ../Sensor/src/DBInterface.cpp ../Sensor/src/HTTPRequest.cpp ../Sensor/src/LogWriter.cpp ../Sensor/src/SLevel.cpp ../Sensor/main_old.cpp .tmp/Sensor1.0.0/ && (cd `dirname .tmp/Sensor1.0.0` && $(TAR) Sensor1.0.0.tar Sensor1.0.0 && $(COMPRESS) Sensor1.0.0.tar) && $(MOVE) `dirname .tmp/Sensor1.0.0`/Sensor1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Sensor1.0.0
 
 
 clean:compiler_clean 
@@ -312,13 +327,6 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Sensor/main.cpp ../Sensor/include/Sensor.h \
-		../Sensor/include/SensorType.h \
-		../Sensor/include/DataBuffer.h \
-		../Sensor/include/TemperatureSensor.h \
-		../Sensor/include/AirPressureSensor.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Sensor/main.cpp
-
 AirPressureSensor.o: ../Sensor/src/AirPressureSensor.cpp ../Sensor/include/AirPressureSensor.h \
 		../Sensor/include/SensorType.h \
 		../Sensor/include/DataBuffer.h
@@ -336,6 +344,44 @@ TemperatureSensor.o: ../Sensor/src/TemperatureSensor.cpp ../Sensor/include/Tempe
 
 DataBuffer.o: ../Sensor/src/DataBuffer.cpp ../Sensor/include/DataBuffer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DataBuffer.o ../Sensor/src/DataBuffer.cpp
+
+main.o: ../Sensor/test/main.cpp ../Sensor/include/catch.hpp \
+		../Sensor/include/DataBuffer.h \
+		../Sensor/include/DBInterface.h \
+		../Sensor/include/Config.h \
+		../Sensor/include/LogWriter.h \
+		../Sensor/include/SLevel.h \
+		../Sensor/include/HTTPRequest.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Sensor/test/main.cpp
+
+DBInterface.o: ../Sensor/src/DBInterface.cpp ../Sensor/include/DBInterface.h \
+		../Sensor/include/DataBuffer.h \
+		../Sensor/include/Config.h \
+		../Sensor/include/LogWriter.h \
+		../Sensor/include/SLevel.h \
+		../Sensor/include/HTTPRequest.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DBInterface.o ../Sensor/src/DBInterface.cpp
+
+HTTPRequest.o: ../Sensor/src/HTTPRequest.cpp ../Sensor/include/HTTPRequest.h \
+		../Sensor/include/LogWriter.h \
+		../Sensor/include/SLevel.h \
+		../Sensor/include/Config.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o HTTPRequest.o ../Sensor/src/HTTPRequest.cpp
+
+LogWriter.o: ../Sensor/src/LogWriter.cpp ../Sensor/include/LogWriter.h \
+		../Sensor/include/SLevel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o LogWriter.o ../Sensor/src/LogWriter.cpp
+
+SLevel.o: ../Sensor/src/SLevel.cpp ../Sensor/include/SLevel.h \
+		../Sensor/include/LogWriter.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SLevel.o ../Sensor/src/SLevel.cpp
+
+main_old.o: ../Sensor/main_old.cpp ../Sensor/include/Sensor.h \
+		../Sensor/include/SensorType.h \
+		../Sensor/include/DataBuffer.h \
+		../Sensor/include/TemperatureSensor.h \
+		../Sensor/include/AirPressureSensor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_old.o ../Sensor/main_old.cpp
 
 ####### Install
 
