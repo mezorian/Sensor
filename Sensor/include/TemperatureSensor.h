@@ -20,6 +20,7 @@ using namespace std;
 // --- TODO -- dummy code ---
 
 #include "SensorType.h"
+#include "Config.h"
 
 /**
  * TemperatureSensor class
@@ -35,6 +36,8 @@ class TemperatureSensor : public SensorType {
 
         /* --- measuring --- */
         DataBuffer readSensor();
+    private:
+        double readDS18B20(int pin_);
 };
 
 #endif // TEMPERATURESENSOR_H

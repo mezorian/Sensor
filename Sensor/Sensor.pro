@@ -31,7 +31,8 @@ SOURCES += \
     src/HTTPRequest.cpp \
     src/LogWriter.cpp \
     src/SLevel.cpp \
-    main_old.cpp
+    main_old.cpp \
+    src/Third-Party-Code/DS18B20.cpp
 
 HEADERS += \
     include/AirPressureSensor.h \

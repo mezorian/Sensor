@@ -339,16 +339,22 @@ Sensor.o: ../Sensor/src/Sensor.cpp ../Sensor/include/Sensor.h \
 
 TemperatureSensor.o: ../Sensor/src/TemperatureSensor.cpp ../Sensor/include/TemperatureSensor.h \
 		../Sensor/include/DataBuffer.h \
-		../Sensor/include/SensorType.h
+		../Sensor/include/SensorType.h \
+		../Sensor/include/Config.h \
+		../Sensor/src/Third-Party-Code/DS18B20.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TemperatureSensor.o ../Sensor/src/TemperatureSensor.cpp
 
 DataBuffer.o: ../Sensor/src/DataBuffer.cpp ../Sensor/include/DataBuffer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DataBuffer.o ../Sensor/src/DataBuffer.cpp
 
 main.o: ../Sensor/test/main.cpp ../Sensor/include/catch.hpp \
+		../Sensor/include/Sensor.h \
+		../Sensor/include/SensorType.h \
 		../Sensor/include/DataBuffer.h \
-		../Sensor/include/DBInterface.h \
+		../Sensor/include/TemperatureSensor.h \
 		../Sensor/include/Config.h \
+		../Sensor/include/AirPressureSensor.h \
+		../Sensor/include/DBInterface.h \
 		../Sensor/include/LogWriter.h \
 		../Sensor/include/SLevel.h \
 		../Sensor/include/HTTPRequest.h
@@ -380,6 +386,7 @@ main_old.o: ../Sensor/main_old.cpp ../Sensor/include/Sensor.h \
 		../Sensor/include/SensorType.h \
 		../Sensor/include/DataBuffer.h \
 		../Sensor/include/TemperatureSensor.h \
+		../Sensor/include/Config.h \
 		../Sensor/include/AirPressureSensor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_old.o ../Sensor/main_old.cpp
 
